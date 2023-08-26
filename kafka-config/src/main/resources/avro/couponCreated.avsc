@@ -1,0 +1,10 @@
+{"namespace": "com.sales.engine.kafka.avro.model",
+  "type": "record",
+  "name": "CouponCreatedAvroModel",
+  "fields": [
+    {"name": "couponUuid", "type": "string", "logicalType": "UUID"},
+    {"name": "promoCode", "type": "string"},
+    {"name": "companyUuid", "type": "string", "logicalType": "UUID"},
+    {"name": "companyName", "type": ["null", "string"]}
+  ]
+}

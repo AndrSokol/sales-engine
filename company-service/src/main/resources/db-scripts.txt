@@ -1,0 +1,5 @@
+create table company (
+    uuid uuid PRIMARY KEY,
+    company_name varchar(50),
+    created_at timestamp
+);

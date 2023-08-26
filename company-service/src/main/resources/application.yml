@@ -1,0 +1,18 @@
+server:
+  port: 8093
+
+spring:
+  application:
+    name: "company-service"
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydatabase?currentSchema=company
+    username: myuser
+    password: mypassword
+    driver-class-name: org.postgresql.Driver
+
+opentracing:
+  jaeger:
+    udp-sender:
+      host: localhost
+      port: 6831
+    log-spans: true

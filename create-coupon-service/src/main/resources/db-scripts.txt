@@ -1,0 +1,6 @@
+create table coupon (
+                        uuid uuid PRIMARY KEY,
+                        promo_code varchar(50),
+                        company_name varchar(50),
+                        created_at timestamp
+);

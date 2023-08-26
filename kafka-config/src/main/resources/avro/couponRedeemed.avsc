@@ -1,0 +1,8 @@
+{"namespace": "com.sales.engine.kafka.avro.model",
+  "type": "record",
+  "name": "CouponRedeemedAvroModel",
+  "fields": [
+    {"name": "couponUuid", "type": "string", "logicalType": "UUID"},
+    {"name": "redeemedAt", "type": ["null", "long"], "logicalType": ["null", "date"]}
+  ]
+}

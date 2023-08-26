@@ -1,0 +1,53 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="andr">
+        <createTable tableName="coupon">
+            <column name="uuid" type="uuid" >
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="promo_code" type="varchar(100)"/>
+            <column name="company_name" type="varchar(100)"/>
+            <column name="created_at" type="timestamp"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="andr" id="2">
+        <addColumn schemaName= "create-coupon"
+                   tableName="coupon">
+            <column afterColumn="uuid"
+                    name="companyUuid"
+                    type="uuid">
+<!--                <constraints nullable="false" />-->
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet author="andr" id="3">
+        <dropColumn schemaName="create-coupon"
+                    tableName="coupon">
+            <column name="company_name"/>
+        </dropColumn>
+    </changeSet>
+
+    <changeSet author="andr" id="4">
+        <renameColumn  columnDataType="uuid"
+                       newColumnName="company-uuid"
+                       oldColumnName="companyUuid"
+                       remarks="Renamed by conventions"
+                       schemaName="create-coupon"
+                       tableName="coupon"/>
+    </changeSet>
+
+    <changeSet author="andr" id="5">
+        <renameColumn  columnDataType="uuid"
+                       newColumnName="company_uuid"
+                       oldColumnName="company-uuid"
+                       remarks="Renamed by conventions"
+                       schemaName="create-coupon"
+                       tableName="coupon"/>
+    </changeSet>
+
+</databaseChangeLog>

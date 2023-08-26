@@ -1,0 +1,63 @@
+server:
+  port: 8091
+
+spring:
+  application:
+    name: create-coupon-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydatabase?currentSchema=create-coupon
+    username: myuser
+    password: mypassword
+    driver-class-name: org.postgresql.Driver
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+kafka-config:
+  bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
+  schema-registry-url-key: schema.registry.url
+  schema-registry-url: http://localhost:8081
+  num-of-partitions: 3
+  replication-factor: 3
+
+kafka-producer-config:
+  topic:
+    coupon-created:
+      name: "coupon-created"
+  key-serializer-class: org.apache.kafka.common.serialization.StringSerializer
+  value-serializer-class: io.confluent.kafka.serializers.KafkaAvroSerializer
+  compression-type: snappy
+  acks: all
+  batch-size: 16384
+  batch-size-boost-factor: 100
+  linger-ms: 5
+  request-timeout-ms: 60000
+  retry-count: 5
+
+management:
+  endpoints.web.exposure.include:
+    - '*'
+  endpoint.health.show-details: always
+  health.circuitbreakers.enabled: true
+
+resilience4j:
+#  circuitbreaker:
+#    circuitBreakerAspectOrder: 1
+#    configs:
+#      default:
+#        registerHealthIndicator: true
+#        slidingWindowSize: 10
+#        minimumNumberOfCalls: 5
+#        permittedNumberOfCallsInHalfOpenState: 3
+#        automaticTransitionFromOpenToHalfOpenEnabled: true
+#        waitDurationInOpenState: 5s
+#        failureRateThreshold: 50
+#        eventConsumerBufferSize: 10
+  retry:
+#    retryAspectOrder: 2  --need in case when retry must be used before cirkuitbreaker
+    instances:
+      companyService:
+        maxAttempts: 3
+        waitDuration: 3s
+
