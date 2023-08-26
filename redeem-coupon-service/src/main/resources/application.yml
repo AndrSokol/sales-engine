@@ -15,18 +15,6 @@ spring:
       host: localhost
       port: 6379
 
-opentracing:
-  jaeger:
-    udp-sender:
-      host: localhost
-      port: 6831
-    log-spans: true
-
-kafka:
-  coupon-created:
-    topic-name: coupon-created
-    consumer-group-id: coupon-redeem-service
-
 kafka-config:
   bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
   schema-registry-url-key: schema.registry.url

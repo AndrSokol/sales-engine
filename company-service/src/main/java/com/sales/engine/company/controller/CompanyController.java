@@ -23,13 +23,11 @@ public class CompanyController {
     public CompanyDto getCompanyById(@PathVariable String companyId) {
         log.info("Retrieve company info by uuid: {}", companyId);
         UUID uuid = UUID.fromString(companyId);
-        CompanyDto companyDto = companyService.getByUuid(uuid);
-        return companyDto;
+        return companyService.getByUuid(uuid);
     }
 
     @PostMapping
     public CompanyDto createCompany(@RequestBody CreateCompanyRequest createCompanyRequest) {
-        CompanyDto companyDto = companyService.createCompany(createCompanyRequest);
-        return companyDto;
+        return companyService.createCompany(createCompanyRequest);
     }
 }

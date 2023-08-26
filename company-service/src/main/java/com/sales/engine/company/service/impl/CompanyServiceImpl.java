@@ -45,7 +45,8 @@ public class CompanyServiceImpl implements CompanyService {
             Company savedCompany = companyRepository.save(newCompany);
             return companyMapper.companyToDto(savedCompany);
         } else {
-            throw new CompanyAlreadyExistsException(String.format("Company with name %s already exists"));
+            throw new CompanyAlreadyExistsException(
+                    String.format("Company with name %s already exists", createCompanyRequest.companyName()));
         }
     }
 }

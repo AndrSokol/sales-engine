@@ -9,10 +9,3 @@ spring:
     username: myuser
     password: mypassword
     driver-class-name: org.postgresql.Driver
-
-opentracing:
-  jaeger:
-    udp-sender:
-      host: localhost
-      port: 6831
-    log-spans: true
