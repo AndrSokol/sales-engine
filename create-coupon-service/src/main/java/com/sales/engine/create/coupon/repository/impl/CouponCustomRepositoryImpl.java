@@ -3,12 +3,14 @@ package com.sales.engine.create.coupon.repository.impl;
 import com.sales.engine.create.coupon.entity.Coupon;
 import com.sales.engine.create.coupon.repository.CouponCustomRepository;
 import com.sales.engine.create.coupon.repository.CouponRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Slf4j
 @Service
 public class CouponCustomRepositoryImpl implements CouponCustomRepository {
 
@@ -30,6 +32,7 @@ public class CouponCustomRepositoryImpl implements CouponCustomRepository {
 
     @Override
     public Coupon save(Coupon coupon) {
+        log.info("Saving coupon with id: {}", coupon);
         return couponRepository.save(coupon);
     }
 

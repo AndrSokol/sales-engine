@@ -27,6 +27,11 @@
             <id>confluent</id>
             <url>https://packages.confluent.io/maven/</url>
         </repository>
+        <repository>
+            <id>splunk-artifactory</id>
+            <name>Splunk Releases</name>
+            <url>https://splunk.jfrog.io/splunk/ext-releases-local</url>
+        </repository>
     </repositories>
 
     <properties>
@@ -41,6 +46,7 @@
         <spring-kafka.version>3.0.9</spring-kafka.version>
         <kafka-clients.version>3.0.0</kafka-clients.version>
         <joda-time.version>2.12.2</joda-time.version>
+        <splunk-logging.version>1.8.0</splunk-logging.version>
     </properties>
 
     <dependencyManagement>
@@ -52,6 +58,11 @@
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-log4j2</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
@@ -160,6 +171,11 @@
                 <groupId>com.fasterxml.jackson.datatype</groupId>
                 <artifactId>jackson-datatype-jsr310</artifactId>
                 <version>${com.fasterxml.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.splunk.logging</groupId>
+                <artifactId>splunk-library-javalogging</artifactId>
+                <version>${splunk-logging.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
