@@ -32,13 +32,13 @@ public class CouponKafkaProducer implements CouponProducer {
         CouponCreatedAvroModel message = CouponCreatedAvroModel.newBuilder()
                 .setCouponUuid(coupon.getUuid().toString())
                 .setPromoCode(coupon.getPromoCode())
-                .setCompanyName(coupon.getCompanyInfo().companyName())
+                .setCompanyName(coupon.getCompanyInfo() != null ? coupon.getCompanyInfo().companyName() : null)
                 .setCompanyUuid(coupon.getCompanyUuid().toString())
                 .build();
 
         kafkaTemplate.send(couponCreatedTopicName, message);
 
-        log.info("Sending message='{}' to topic='{}'", message, couponCreatedTopicName);
+        log.info("Sending message: '{}' to topic: '{}'", message, couponCreatedTopicName);
 
         try {
             CompletableFuture<SendResult<String, CouponCreatedAvroModel>> kafkaResultFuture = kafkaTemplate

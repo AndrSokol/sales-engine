@@ -4,14 +4,17 @@ import com.sales.engine.company.dto.CompanyDto;
 import com.sales.engine.company.dto.CreateCompanyRequest;
 import com.sales.engine.company.entity.Company;
 import com.sales.engine.company.exception.CompanyAlreadyExistsException;
+import com.sales.engine.company.exception.CompanyNotFoundException;
+import com.sales.engine.company.mapper.CompanyMapper;
 import com.sales.engine.company.repository.CompanyRepository;
 import com.sales.engine.company.service.CompanyService;
-import com.sales.engine.company.mapper.CompanyMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.UUID;
 
+@Slf4j
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
@@ -26,8 +29,11 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public CompanyDto getByUuid(UUID uuid) {
-        Company company = companyRepository.getReferenceById(uuid);
-        return companyMapper.companyToDto(company);
+        Optional<Company> companyOptional = companyRepository.findById(uuid);
+        if (companyOptional.isEmpty()) {
+            throw new CompanyNotFoundException(String.format("Company with id: %s not found", uuid));
+        }
+        return companyMapper.companyToDto(companyOptional.get());
     }
 
     @Override

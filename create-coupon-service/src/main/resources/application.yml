@@ -60,4 +60,6 @@ resilience4j:
       companyService:
         maxAttempts: 3
         waitDuration: 3s
+        ignore-exceptions:
+          - com.sales.engine.create.coupon.exception.CompanyNotFoundException
 

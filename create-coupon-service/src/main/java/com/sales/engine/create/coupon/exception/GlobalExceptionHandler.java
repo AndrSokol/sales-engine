@@ -10,7 +10,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(CouponNotFoundException.class)
-    public ResponseEntity<ExceptionDto> handleCustomException(CouponNotFoundException ex) {
+    public ResponseEntity<ExceptionDto> handleCouponNotFoundException(CouponNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ExceptionDto(ex.getMessage()));
+    }
+
+    @ExceptionHandler(CompanyNotFoundException.class)
+    public ResponseEntity<ExceptionDto> handleCompanyNotFoundException(CompanyNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ExceptionDto(ex.getMessage()));
     }
 }
