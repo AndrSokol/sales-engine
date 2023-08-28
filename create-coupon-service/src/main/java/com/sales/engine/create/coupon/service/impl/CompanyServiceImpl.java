@@ -37,7 +37,7 @@ public class CompanyServiceImpl implements CompanyService {
         headers.set(HttpHeaders.CONTENT_TYPE, "application/json");
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
-        ResponseEntity<CompanyResponse> response = null;
+        ResponseEntity<CompanyResponse> response;
         try {
             response = restTemplate.exchange(String.format(COMPANY_SERVICE_URL + "{companyUuid}"),
                     HttpMethod.GET,
